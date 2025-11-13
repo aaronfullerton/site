@@ -1,0 +1,68 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Footer from "@/components/Footer.astro";
+import Socials from "@/components/Socials.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import { SOCIALS } from "@/constants";
+import IconGM from "@/assets/icons/IconGM.svg";
+---
+
+<Layout>
+  <main id="main-content" data-layout="index">
+    <section id="hero" class="pt-8 pb-6">
+      <h1 class="text-md my-4 inline-block font-bold sm:my-8">
+        <IconGM class="relative bottom-1.5 inline-block" /> Aaron Fullerton
+      </h1>
+
+      <p>
+        I'm a developer based in Vermont. I enjoy building things at the
+        intersection of healthcare and technology.
+      </p>
+      <p class="pt-8">
+        Today, I am focused on building tools to help people prevent and detect
+        chronic disease at <LinkButton
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="https://catchbio.com"
+        >
+          Catch
+        </LinkButton>. Previously, I was an early engineer at <LinkButton
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="https://charliehealth.com"
+        >
+          Charlie Health
+        </LinkButton>
+        &amp; <LinkButton
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="https://virtahealth.com"
+        >
+          Virta Health
+        </LinkButton>.
+      </p>
+      <p class="pt-8">
+        I occasionally consult and advise healthcare startups. If you're
+        interested in that, please get in touch.
+      </p>
+
+      {
+        // only display if at least one social link is enabled
+        SOCIALS.length > 0 && (
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+            <Socials />
+          </div>
+        )
+      }
+    </section>
+  </main>
+  <Footer />
+
+  <script>
+    document.addEventListener("astro:page-load", () => {
+      const indexLayout = (
+        document.querySelector("#main-content") as HTMLElement
+      )?.dataset?.layout;
+      if (indexLayout) {
+        sessionStorage.setItem("backUrl", "/");
+      }
+    });
+  </script>
+</Layout>
